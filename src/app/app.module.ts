@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
 
@@ -14,15 +15,12 @@ import { CoursesComponent } from './courses/courses.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CoursesComponent
-  ],
+  declarations: [AppComponent, HomeComponent, CoursesComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
