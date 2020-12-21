@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -8,41 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class CoursesComponent implements OnInit {
   selectedCourse = null;
   colorTheme = 'purple';
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 9 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: false,
-    },
-    {
-      id: 2,
-      title: 'JS for all of us',
-      description: 'Learn the fundamentals of JS',
-      percentComplete: 30,
-      favorite: true,
-    },
-    {
-      id: 3,
-      title: 'Learn how to Code',
-      description: 'Learn basic code structures',
-      percentComplete: 20,
-      favorite: false,
-    },
-  ];
+  courses = null;
 
-  constructor() {}
+  constructor(private coursesService: CoursesService) {}
+
+  ngOnInit(): void {
+    this.resetCourse();
+    // this.courses = this.coursesService.courses;
+    this.courses = this.coursesService.all();
+  }
 
   selectCourse(course) {
-    console.log('what is course', course);
     this.selectedCourse = course;
-  }
-  deleteCourse(courseId) {
-    console.log('deleting course', courseId);
-    if (courseId === this.selectedCourse.id) {
-      this.selectedCourse = null;
-    }
   }
 
   resetCourse() {
@@ -56,25 +34,31 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = 'emptyCourse';
   }
 
+  saveCourse(course) {
+    if (course.id) {
+      this.coursesService.update(course);
+    } else this.coursesService.create(course);
+
+    // const newAr = this.courses.map((course) => {
+    //   if (course.id === this.selectedCourse.Id) {
+    //     course.percentComplete = this.selectedCourse.percentComplete;
+    //     course.favorite = this.selectedCourse.favorite;
+    //     return course;
+    //   }
+    //   return course;
+    // });
+    // console.log('newAr', newAr);
+    // this.courses = newAr;
+  }
+
+  deleteSelectedCourse(course) {
+    // if (courseId === this.selectedCourse.id) {
+    //   this.selectedCourse = null;
+    // }
+    this.coursesService.delete(course.id);
+  }
+
   cancel() {
-    this.resetCourse();
-  }
-
-  saveCourse() {
-    console.log(this.selectedCourse);
-    const newAr = this.courses.map((course) => {
-      if (course.id === this.selectedCourse.Id) {
-        course.percentComplete = this.selectedCourse.percentComplete;
-        course.favorite = this.selectedCourse.favorite;
-        return course;
-      }
-      return course;
-    });
-    console.log('newAr', newAr);
-    this.courses = newAr;
-  }
-
-  ngOnInit(): void {
     this.resetCourse();
   }
 }

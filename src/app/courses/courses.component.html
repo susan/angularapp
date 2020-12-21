@@ -16,7 +16,9 @@
             <button
               mat-icon-button
               color="warn"
-              (click)="deleteCourse(course.id); $event.stopPropagation()"
+              (click)="
+                deleteSelectedCourse(course.id); $event.stopPropagation()
+              "
             >
               <mat-icon>delete course</mat-icon>
             </button>
@@ -37,7 +39,7 @@
       <mat-card-content>
         <!-- COURSE FORM -->
         <mat-list dense>
-          <form #form="ngForm" (submit)="saveCourse()">
+          <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
             <mat-form-field>
               <input
                 matInput
