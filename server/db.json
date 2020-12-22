@@ -6,6 +6,34 @@
       "description": "Learn the fundamentals of Angular 9",
       "percentComplete": 26,
       "favorite": true
+    },
+    {
+      "id": 2,
+      "title": "emptyCourse",
+      "description": "emptyCourse not a string, is an obj",
+      "percentComplete": 0,
+      "favorite": false
+    },
+    {
+      "id": 3,
+      "title": "deleteCourse",
+      "description": "takes in an id",
+      "percentComplete": 100,
+      "favorite": false
+    },
+    {
+      "id": 4,
+      "title": "add +courseId for path endpoint",
+      "description": "path endpoint",
+      "percentComplete": 51,
+      "favorite": false
+    },
+    {
+      "id": 5,
+      "title": "with string",
+      "description": "put `${eval func}/${course.id}`",
+      "percentComplete": 50,
+      "favorite": false
     }
   ]
 }

@@ -15,11 +15,19 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetCourse();
+    //v1
     // this.courses = this.coursesService.courses;
-    this.courses = this.coursesService.all();
+    //v2
+    //after you make courses private in services you call the method:
+    //this.courses = this.courseServices.all()
+    //v3
+    //this.coursesService.all().subscribe((data) => (this.courses = data));
+    //v4
+    this.loadCourses();
   }
 
   selectCourse(course) {
+    console.log('what is course', course);
     this.selectedCourse = course;
   }
 
@@ -31,13 +39,25 @@ export class CoursesComponent implements OnInit {
       percentComplete: 0,
       favorite: false,
     };
-    this.selectedCourse = 'emptyCourse';
+    this.selectedCourse = emptyCourse;
+  }
+
+  loadCourses() {
+    this.coursesService.all().subscribe((data) => (this.courses = data));
   }
 
   saveCourse(course) {
     if (course.id) {
-      this.coursesService.update(course);
-    } else this.coursesService.create(course);
+      this.coursesService
+        .update(course)
+        .subscribe((data) => this.loadCourses());
+      this.resetCourse();
+    } else {
+      this.coursesService
+        .create(course)
+        .subscribe((data) => this.loadCourses());
+      this.resetCourse();
+    }
 
     // const newAr = this.courses.map((course) => {
     //   if (course.id === this.selectedCourse.Id) {
@@ -51,11 +71,13 @@ export class CoursesComponent implements OnInit {
     // this.courses = newAr;
   }
 
-  deleteSelectedCourse(course) {
+  deleteSelectedCourse(courseId) {
     // if (courseId === this.selectedCourse.id) {
     //   this.selectedCourse = null;
     // }
-    this.coursesService.delete(course.id);
+    this.coursesService
+      .delete(courseId)
+      .subscribe((data) => this.loadCourses());
   }
 
   cancel() {

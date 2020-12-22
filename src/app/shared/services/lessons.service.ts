@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LessonsService {
-  courseLessons = [
+  private courseLessons = [
     { title: 'Hello Angular' },
     { title: 'Component Fundamentals' },
     { title: 'Template Driven Forms' },
@@ -16,4 +16,7 @@ export class LessonsService {
   ];
 
   constructor() {}
+  all() {
+    return this.courseLessons;
+  }
 }

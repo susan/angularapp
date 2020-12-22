@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
+  private model = 'courses';
   private courses = [
     {
       id: 1,
@@ -28,10 +30,11 @@ export class CoursesService {
     },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   all() {
-    return this.courses;
+    return this.http.get(this.getURL());
+    //return this.courses;
   }
 
   find(courseId) {
@@ -40,13 +43,20 @@ export class CoursesService {
 
   create(course) {
     console.log('CREATING', course);
+    return this.http.post(this.getURL(), course);
   }
 
   update(course) {
     console.log('UPDATING', course);
+    return this.http.put(`${this.getURL()}/${course.id}`, course);
   }
 
   delete(courseId) {
     console.log('DELETING', courseId);
+    return this.http.delete(`${this.getURL()}/${courseId}`);
+  }
+
+  private getURL() {
+    return `http://localhost:3000/${this.model}`;
   }
 }
