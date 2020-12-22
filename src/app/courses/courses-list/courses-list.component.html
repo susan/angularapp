@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Courses list </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- COURSES LIST -->
+    <mat-list dense>
+      <mat-list-item
+        *ngFor="let course of courses"
+        (click)="selectedCourse.emit(course)"
+      >
+        <h3 matLine>{{ course.title }}</h3>
+        <h6 matLine>Description: {{ course.description }}</h6>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="deletedCourse.emit(course.id); $event.stopPropagation()"
+        >
+          <mat-icon>delete course</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

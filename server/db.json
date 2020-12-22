@@ -34,6 +34,13 @@
       "description": "put `${eval func}/${course.id}`",
       "percentComplete": 50,
       "favorite": false
+    },
+    {
+      "id": 6,
+      "title": "",
+      "description": "",
+      "percentComplete": 0,
+      "favorite": false
     }
   ]
 }

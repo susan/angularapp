@@ -46,17 +46,20 @@ export class CoursesComponent implements OnInit {
     this.coursesService.all().subscribe((data) => (this.courses = data));
   }
 
+  refreshCourses() {
+    this.resetCourse();
+    this.loadCourses();
+  }
+
   saveCourse(course) {
     if (course.id) {
       this.coursesService
         .update(course)
-        .subscribe((data) => this.loadCourses());
-      this.resetCourse();
+        .subscribe((data) => this.refreshCourses());
     } else {
       this.coursesService
         .create(course)
-        .subscribe((data) => this.loadCourses());
-      this.resetCourse();
+        .subscribe((data) => this.refreshCourses());
     }
 
     // const newAr = this.courses.map((course) => {
@@ -77,7 +80,7 @@ export class CoursesComponent implements OnInit {
     // }
     this.coursesService
       .delete(courseId)
-      .subscribe((data) => this.loadCourses());
+      .subscribe((data) => this.refreshCourses());
   }
 
   cancel() {

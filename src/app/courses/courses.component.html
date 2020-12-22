@@ -1,11 +1,17 @@
 <div class="courses-containers">
   <div class="courses-list">
-    <mat-card>
+    <app-courses-list
+      [courses]="courses"
+      (selectedCourse)="selectCourse($event)"
+      (deletedCourse)="deleteSelectedCourse($event)"
+    >
+    </app-courses-list>
+    <!-- <mat-card>
       <mat-card-header>
         <mat-card-title> Courses list </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <!-- COURSES LIST -->
+        -COURSES LIST
         <mat-list dense>
           <mat-list-item
             *ngFor="let course of courses"
@@ -25,11 +31,17 @@
           </mat-list-item>
         </mat-list>
       </mat-card-content>
-    </mat-card>
+    </mat-card> -->
   </div>
 
   <div class="course-details">
-    <mat-card>
+    <app-course-details
+      [course]="selectedCourse"
+      (savedCourse)="saveCourse($event)"
+      (cancelledCourse)="cancel()"
+    >
+    </app-course-details>
+    <!-- <mat-card>
       <mat-card-header>
         <span *ngIf="selectedCourse.title; else noneSelected">{{
           selectedCourse.title
@@ -37,7 +49,7 @@
         <ng-template #noneSelected> Select Course </ng-template>
       </mat-card-header>
 
-      <!-- COURSE FORM -->
+      COURSE FORM
       <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
         <mat-card-content>
           <mat-form-field>
@@ -92,11 +104,12 @@
         </mat-card-actions>
       </form>
 
-      <!-- COURSE ACTIONS -->
+      COURSE ACTIONS
       <mat-card-actions>
         <pre>{{ form.value | json }}</pre>
         <pre>{{ form.valid | json }}</pre>
       </mat-card-actions>
     </mat-card>
+  </div> -->
   </div>
 </div>
