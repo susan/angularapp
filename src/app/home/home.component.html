@@ -11,7 +11,12 @@
       </form>
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <app-lessons-list
+    [lessons]="courseLessons"
+    [selectedLesson]="currentLesson"
+    (chooseLesson)="selectLesson($event)"
+  ></app-lessons-list>
+  <!-- <mat-card-content>
     <mat-list dense>
       <mat-list-item
         *ngFor="let item of courseLessons"
@@ -20,17 +25,17 @@
         <h3>{{ item | json }}</h3>
       </mat-list-item>
     </mat-list>
-    <!-- <pre>{{ courseLessons | json }}</pre> -->
-    <!-- LESSON LIST -->
+    <pre>{{ courseLessons | json }}</pre>
+    LESSON LIST
   </mat-card-content>
 </mat-card>
 
 <mat-card>
   <mat-card-title> Debug the output </mat-card-title>
   <mat-card-content>
-    <span *ngIf="currentLesson; else elseBlock">{{
+    <span *ngIf="currentLesson; else elseBlock>{{
       currentLesson | json
     }}</span>
     <ng-template #elseBlock>Show something if content is null</ng-template>
-  </mat-card-content>
+  </mat-card-content> -->
 </mat-card>

@@ -1,0 +1,23 @@
+<mat-card-content>
+  <mat-list dense>
+    <mat-list-item
+      *ngFor="let item of lessons"
+      (click)="chooseLesson.emit(item)"
+    >
+      <h3>{{ item | json }}</h3>
+    </mat-list-item>
+  </mat-list>
+  <!-- LESSON LIST -->
+  <!-- <pre>hello</pre>
+  <pre>{{ lessons | json }}</pre> -->
+</mat-card-content>
+
+<mat-card>
+  <mat-card-title> Debug the output </mat-card-title>
+  <mat-card-content>
+    <span *ngIf="selectedLesson; else elseBlock">{{
+      selectedLesson | json
+    }}</span>
+    <ng-template #elseBlock>Show something if content is null</ng-template>
+  </mat-card-content>
+</mat-card>
